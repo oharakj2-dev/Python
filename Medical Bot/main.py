@@ -6,6 +6,7 @@ skin_prompt = "Please perform a skin pinch and describe the patient's skin condi
 severe_dehydration_prompt = "Severe dehydration detected. Immediate medical attention required!\n"
 some_dehydration_prompt = "Some dehydration detected. Further assessment needed.\n"
 no_dehydration_prompt = "No dehydration detected. Patient appears to be in good health.\n"
+error_prompt = "Could not save patient and diagnosis due to invalid input.\n"
 
 patients_and_diagnosis = [
     "Mike, No dehydration detected. Patient appears to be in good health.",
@@ -21,6 +22,9 @@ def get_patient_data():
 
 def save_new_diagnosis(name, diagnosis):
     # This function would typically save the new diagnosis to a database or an API
+    if name == "" or diagnosis == "":
+        print(error_prompt)
+        return
     final_diagnosis = name + ", " + diagnosis
     patients_and_diagnosis.append(final_diagnosis)
     print(final_diagnosis + " has been added to the patient list.\n") 
@@ -32,8 +36,7 @@ def assess_skin(skin):
     elif skin == '2':
         return severe_dehydration_prompt
     else:
-        print("Invalid input for skin condition.")
-        return
+        return ""
 
 def assess_eyes(eyes):
     if eyes == '1':
@@ -41,8 +44,7 @@ def assess_eyes(eyes):
     elif eyes == '2':
         return severe_dehydration_prompt
     else:
-        print("Invalid input for eyes.")
-        return
+        return ""
 
 # Function to diagnose based on appearance
 def assess_appearance():
@@ -54,8 +56,7 @@ def assess_appearance():
         eyes = input(eye_prompt)
         return assess_eyes(eyes)
     else:
-        print("Invalid input for appearance.")
-        return
+        return ""
 
 def starting_new_diagnosis():
      # This function would typically initiate a new diagnosis process
