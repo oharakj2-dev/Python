@@ -1,3 +1,5 @@
+import os
+
 welcome_prompt = "Welcome Doctor! How can I assist you today?\n - To list all patients, press 1 \n - To run a new diagnosis, press 2\n - To quit, press q\n"
 name_prompt = "Please enter patients name:\n"
 appearance_prompt = "Please describe the patient's appearance:\n - 1: Normal\n - 2: Irritable or lethargic\n"
@@ -8,25 +10,36 @@ some_dehydration_prompt = "Some dehydration detected. Further assessment needed.
 no_dehydration_prompt = "No dehydration detected. Patient appears to be in good health.\n"
 error_prompt = "Could not save patient and diagnosis due to invalid input.\n"
 
+
 patients_and_diagnosis = [
     "Mike, No dehydration detected. Patient appears to be in good health.",
     "Sarah, Some dehydration detected. Further assessment needed.",
     "Tom, Severe dehydration detected. Immediate medical attention required!"
 ]
 
-# Function to list all patients
+# Function to list all patients from patients.txt
 def get_patient_data():
-     # This function would typically fetch patient data from a database or an API
-     for patient in patients_and_diagnosis:
-         print(patient)
+    #for patient in patients_and_diagnosis:
+    #    print(patient)
+    patients = open("patients.txt", "r+")
+    print(patients.read())
+    patients.close()    
 
+# Function to save a new diagnosis to patients.txt
 def save_new_diagnosis(name, diagnosis):
-    # This function would typically save the new diagnosis to a database or an API
     if name == "" or diagnosis == "":
         print(error_prompt)
         return
     final_diagnosis = name + ", " + diagnosis
-    patients_and_diagnosis.append(final_diagnosis)
+    #patients_and_diagnosis.append(final_diagnosis)
+    if not os.path.exists("patients.txt"):
+        with open("patients.txt", "w") as f:
+            f.write(final_diagnosis + "\n")
+            f.close()
+    else: 
+        with open("patients.txt", "a") as f:
+            f.write(final_diagnosis + "\n")
+            f.close()
     print(final_diagnosis + " has been added to the patient list.\n") 
 
 
@@ -59,7 +72,7 @@ def assess_appearance():
         return ""
 
 def starting_new_diagnosis():
-     # This function would typically initiate a new diagnosis process
+     # Collects patient name, assesses appearance, and saves the new diagnosis
      name = input(name_prompt)
      diagnosis = assess_appearance()
      if diagnosis is not None:
@@ -79,6 +92,20 @@ def main():
         return
     else:
         print("Invalid selection, please try again.")
-        return
-
 main()
+
+# def test_assess_skin():
+#     assert assess_skin('1') == no_dehydration_prompt
+#     assert assess_skin('2') == severe_dehydration_prompt
+#     assert assess_skin('3') == ""
+#
+# test_assess_skin()
+# def test_assess_eyes():
+#     assert assess_eyes('1') == some_dehydration_prompt
+#     assert assess_eyes('2') == severe_dehydration_prompt
+#     assert assess_eyes('3') == ""
+#
+# def test_assess_appearance():
+#     assert assess_appearance() == no_dehydration_prompt
+#     assert assess_appearance() == severe_dehydration_prompt
+#     assert assess_appearance() == some_dehydration_prompt
