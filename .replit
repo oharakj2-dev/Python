@@ -1,8 +1,8 @@
 modules = ["python-3.12"]
-run = "[\"Medical Bot", \"main.py\"]"
+run = "[\"main.py\"]"
 
 [nix]
 channel = "stable-25_05"
 
 [deployment]
-run = ["sh", "-c", "[\"Medical Bot", \"main.py\"]"]
+run = ["sh", "-c", "[\"python3\", \"main.py\"]"]
