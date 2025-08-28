@@ -1,20 +1,20 @@
 modules = ["python-3.12"]
-run = ["python3", "Medical Bot/main.py"]
+run = ["python3", "OOP Game Escape/main.py"]
 
 [nix]
 channel = "stable-25_05"
 
 [deployment]
-run = ["sh", "-c", "[\"python3\", \"Medical Bot/main.py\"]"]
+run = ["sh", "-c", "[\"python3\", \"OOP Game Escape/main.py\"]"]
 
 [workflows]
-runButton = "Run Medical Bot"
+runButton = "Run OOP Game Escape"
 
 [[workflows.workflow]]
-name = "Run Medical Bot"
+name = "Run OOP Game Escape"
 author = 33498382
 mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python3 \"Medical Bot/main.py\""
+args = "python3 \"OOP Game Escape/main.py\""
