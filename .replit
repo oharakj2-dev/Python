@@ -6,3 +6,15 @@ channel = "stable-25_05"
 
 [deployment]
 run = ["sh", "-c", "[\"python3\", \"Medical Bot/main.py\"]"]
+
+[workflows]
+runButton = "Run Medical Bot"
+
+[[workflows.workflow]]
+name = "Run Medical Bot"
+author = 33498382
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 \"Medical Bot/main.py\""
