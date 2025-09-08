@@ -45,22 +45,51 @@ class Room:
 		return names
 
 class Game:
+	# initializes the game's attributes
 	def __init__(self):
-		self.attempts = 
-		objects = self.create_objects
-		self.room = Room(111, [])
+		self.attempts = 0
+		objects = self.create_objects()
+		self.room = Room(731, objects)
 
+	# returns a list of game objects in the room
 	def create_objects(self):
 		return [
-			game_object("Sweater", 
+			GameObject("Sweater", 
 									"It's a red sweater that had the number 12 stiched on it.", 
 									"Someone has unstitched the second number",
 									"It smells like lavender."),
-			game_object("Couch", 
-									"It's a couch that looks comfortable. It looks ", 
+			GameObject("Couch", 
+									"It's a couch that looks comfortable. Aside from one of the legs missing. ", 
 									"It's very soft.", 
-									"It smells like old wood.")
+									"It smells like old wood."),
+			GameObject("Journal",
+									"The final entry states that time should be in hours then minutes then seconds (H-M-S).",
+									"It's very worn out.",
+									"It smells like old paper."),
+			GameObject("Spice rack",
+									"There are 7 different spices in it.",
+									"It's very dusty.",
+									"It smells like cinnamon."),
+			GameObject("Clock",
+									"The hour hand is pointing towards the spice rack, the minute hand is pointing towards the couch, and the second hand is pointing towards the sweater.",
+									"It's very dusty.",
+									"It doesn't smell like anything.")
 		]
-game_object = GameObject("rock", "It's gray and smooth.", "It's rough and cold.", "It smells like the earth.")
 
-print(game_object.sniff())
+	def take_turn(self):
+		prompt = self.get_room_prompt()
+		selection = input(prompt)
+		print(selection)
+
+	def get_room_prompt(self):
+		prompt = "Enter the 3 digit lock code or choose an item to interact with:\n"
+		names = self.room.get_game_object_names()
+		for name in names:
+			prompt += f"{item}\n"
+			index +=
+		return prompt
+		
+
+
+game = Game()
+game.take_turn()
