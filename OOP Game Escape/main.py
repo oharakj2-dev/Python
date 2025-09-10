@@ -76,20 +76,32 @@ class Game:
 									"It doesn't smell like anything.")
 		]
 
+	# gets the player's input and processes it
 	def take_turn(self):
 		prompt = self.get_room_prompt()
 		selection = input(prompt)
 		print(selection)
 
+	# Gets the prompt for the room
 	def get_room_prompt(self):
 		prompt = "Enter the 3 digit lock code or choose an item to interact with:\n"
 		names = self.room.get_game_object_names()
+		index = 1
 		for name in names:
-			prompt += f"{item}\n"
-			index +=
+			prompt += f"{name}\n"
+			index += 1
 		return prompt
-		
 
+	# Displays message to get type of interaction with object
+	def select_object(self, index):
+		selected_object = self.room.game_objects[index]
+		prompt = self.get_object_interaction_string(selected_object.name)
+		interaction = input(prompt)
+		print(interaction)
+
+	# Displays message to get type of interaction with object
+	def get_object_interaction_string(self, name):
+		return f"How do you want to interact with the {name}?\n1. Look\n2. Touch\n3. Smell\n"
 
 game = Game()
 game.take_turn()
